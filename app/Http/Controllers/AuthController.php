@@ -17,7 +17,11 @@ class AuthController extends Controller
             'password' => 'required|string|min:8|confirmed',
         ]);
 
-        $user = User::create($validated);
+        $user = User::create([
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+            'password' => $validated['password'], 
+        ]);
 
         $token = $user->createToken('api-token')->plainTextToken;
 
